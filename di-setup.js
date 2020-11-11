@@ -1,6 +1,6 @@
 const awilix = require('awilix');
-const DevController = require('./controller/dev');
-const DevService = require('./service/dev');
+const DevController = require('./controller/DevController');
+const DevService = require('./service/DevService');
 const DevDao = require('./dao/dev');
 const db = require('./db');
 
@@ -9,11 +9,12 @@ const container = awilix.createContainer({
 });
 
 function setup() {
+
   container.register({
-    devController: awilix.asClass(DevController),
+    // devController: awilix.asClass(DevController),
 
     // services
-    devService: awilix.asClass(DevService),
+    // devService: awilix.asClass(DevService),
 
     // DAOs
     devDao: awilix.asClass(DevDao),
@@ -22,9 +23,21 @@ function setup() {
     // support
     db: awilix.asValue(db),
   });
+
+  container.loadModules(
+    ['./controller/*.js', './service/*.js'], 
+    { 
+      cwd: __dirname,
+      formatName: 'camelCase',
+      resolverOptions: {
+        lifetime: awilix.Lifetime.SINGLETON,
+        register: awilix.asClass,
+      },
+    }
+  )
 }
 
-module.exports = {
-  container,
-  setup,
-};
+  module.exports = {
+    container,
+    setup,
+  };
