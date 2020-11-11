@@ -11,7 +11,7 @@ class DevController {
   async createDev(req, res) {
     try {
       const result = await this.devService.createDev(req.body);
-      res.status(201).json(result);
+      res.status(201).json({ message: 'Develper created Successfully' });
     } catch (err) {
       console.error(err);
       res.status(500).json('error');

@@ -4,11 +4,11 @@ const config = require('../config');
 const db = knexjs({
   client: 'pg',
   connection: {
-    host: config.db.host,
-    user: config.db.user,
-    port: config.db.port,
-    password: null,
-    database: config.db.name,
+    host: '192.168.1.11',
+    user: 'postgres',
+    port: 5432,
+    password: 'abc123',
+    database: 'devdb',
   },
   pool: { min: 0, max: 10 },
 });
