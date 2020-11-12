@@ -1,31 +1,30 @@
 const express = require('express');
-const { setup } = require('./di-setup');
+const { configureDI } = require('./di-setup');
 const apiErrorHandler = require('./error/api-error-handler');
-
-setup();
+configureDI();
 const router = require('./routes');
 
-class Server {
-  constructor() {
-    this.app = express();
+function Server() {
+    
+    let app = express();
+
+    this.setup = function setup() {
+        app.use(express.json());
+        app.use('/', router);
+        app.use(apiErrorHandler);
+    }
+    
+    this.run = function run(port) {
+        server = app.listen(port, () => {
+          console.log(`server running on port ${port}`);
+        });
+      }
+    
+    this.stop = function() {
+        server.close(done);
+      }
+      
     this.setup();
-  }
-
-  setup() {
-    this.app.use(express.json());
-    this.app.use('/', router);
-    this.app.use(apiErrorHandler);
-  }
-
-  run(port) {
-    this.server = this.app.listen(port, () => {
-      console.log(`server running on port ${port}`);
-    });
-  }
-
-  stop(done) {
-    this.server.close(done);
-  }
-}
+} 
 
 module.exports = Server;

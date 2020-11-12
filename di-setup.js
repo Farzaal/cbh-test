@@ -6,7 +6,7 @@ const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY,
 });
 
-function setup() {
+function configureDI() {
 
   container.register({
     devDao: awilix.asClass(DevDao),
@@ -28,5 +28,5 @@ function setup() {
 
   module.exports = {
     container,
-    setup,
+    configureDI,
   };
