@@ -3,7 +3,7 @@ module.exports = {
         {
             name: "Node-Dependency-Injection",
             script: "server.js",
-            args: "--rpenv staging",
+            args: "--ptenv local",
             instances: "2"
         }
     ]

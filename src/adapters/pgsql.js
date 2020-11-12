@@ -7,8 +7,6 @@ module.exports = async (config) => {
 
     const dbConfig = config.get('pgsql');
 
-    console.log(dbConfig);
-
     const initOptions = {
         promiseLib: bluebird
     };
