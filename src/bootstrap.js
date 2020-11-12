@@ -2,12 +2,12 @@ const express = require('express');
 const { configureDI } = require('./di-setup');
 const apiErrorHandler = require('./error/api-error-handler');
 
-function Bootstrap(config, process) {
+async function Bootstrap(config, process) {
 
   let app = express();
 
-  this.setup = function setup() {
-    configureDI(config);
+  this.setup = async function setup() {
+    await configureDI(config);
     app.use(express.json());
     app.use('/', require('./routes'));
     app.use(apiErrorHandler);
@@ -21,7 +21,7 @@ function Bootstrap(config, process) {
     server.close(done);
   }
 
-  this.setup();
+  await this.setup();
 }
 
 module.exports = Bootstrap;

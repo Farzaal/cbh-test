@@ -1,21 +1,24 @@
 const awilix = require('awilix');
-const DevDao = require('./dao/dev');
-const db = require('./db');
+const DevDao = require('./models/DevModel');
+const adapters = require('./adapters/index');
 
 const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY,
 });
 
-function configureDI(config) {
+const initAdapters = async (config) => await adapters(config);
+
+async function configureDI(config) {
+
+  const dbAdapters = await initAdapters(config);
 
   container.register({
-    devDao: awilix.asClass(DevDao),
-    db: awilix.asValue(db),
+    db: awilix.asFunction(() => dbAdapters.db).singleton(),
     config: awilix.asValue(config)
   });
 
   container.loadModules(
-    ['./controller/*.js', './service/*.js'], 
+    ['./controllers/*.js', './services/*.js', './models/*.js'], 
     { 
       cwd: __dirname,
       formatName: 'camelCase',

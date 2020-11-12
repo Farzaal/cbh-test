@@ -1,4 +1,11 @@
 {
     "environment": "local",
-    "port": 5000
+    "port": 5000,
+    "pgsql": {
+        "host": "192.168.1.11",
+        "user": "postgres",
+        "port": 5432,
+        "password": "abc123",
+        "database": "devdb"
+    }
 }

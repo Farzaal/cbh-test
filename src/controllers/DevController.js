@@ -1,16 +1,10 @@
 const ApiError = require('../error/api-error');
 
-class DevController {
-  constructor({ devService }) {
-    this.devService = devService;
+function DevController({ devService }) {
 
-    this.createDev = this.createDev.bind(this);
-    this.getDev = this.getDev.bind(this);
-  }
-
-  async createDev(req, res) {
+  this.createDev = async function createDev(req, res) {
     try {
-      const result = await this.devService.createDev(req.body);
+      const result = await devService.createDev(req.body);
       res.status(201).json({ message: 'Develper created Successfully' });
     } catch (err) {
       console.error(err);
@@ -18,10 +12,10 @@ class DevController {
     }
   }
 
-  async getDev(req, res, next) {
+  this.getDev = async function getDev(req, res, next) {
     try {
       const developerId = req.params.id;
-      const developer = await this.devService.getDev(req.params.id);
+      const developer = await devService.getDev(req.params.id);
       if (developer == null) {
         next(ApiError.notFound(`developer with id ${developerId} not found`));
         return;
@@ -30,7 +24,8 @@ class DevController {
     } catch (err) {
       next(err);
     }
-  }
+  }  
+
 }
 
 module.exports = DevController;

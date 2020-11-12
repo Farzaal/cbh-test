@@ -3,7 +3,7 @@ const path = require('path');
 const os = require('os');
 const Bootstrap = require('./bootstrap');
 
-module.exports.bootstrap = (process) => {
+module.exports.bootstrap = async (process) => {
     try {
       nconf.env().argv();
   
@@ -11,7 +11,7 @@ module.exports.bootstrap = (process) => {
   
       nconf.file({ file: path.join(__dirname, 'env', `${env}.json`) });
   
-      Bootstrap(nconf, process);
+      await Bootstrap(nconf, process);
 
     } catch (err) {
       

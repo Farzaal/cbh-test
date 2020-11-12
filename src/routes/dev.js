@@ -1,7 +1,7 @@
 const express = require('express');
 const { container } = require('../di-setup');
 const validate = require('../middleware/validate');
-const developerDto = require('../dto/developer');
+const developerDto = require('../validators/developer');
 
 const devController = container.resolve('devController');
 
