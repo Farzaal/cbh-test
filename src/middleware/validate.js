@@ -1,17 +1,20 @@
-const ApiError = require('../error/api-error');
+const boom = require('@hapi/boom');
 
 function validate(schema) {
   return (req, res, next) => {
-    const { error, value } = schema.validate(req.body);
-    if (error) {
-      next(ApiError.badRequest(error));
-      return;
-    }
+    try {
+    
+      const { error, value } = schema.validate(req.body);
+      
+      if (error)
+          throw boom.badData(error);
 
-    // replace request body with validated value
-    // because then we have applied defaults
-    req.body = value;
-    next();
+      req.body = value;
+      next();
+    
+    } catch(error) {
+      return res.status(error.output.statusCode).json(error);
+    }
   };
 }
 

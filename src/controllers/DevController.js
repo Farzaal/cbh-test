@@ -1,4 +1,5 @@
-const ApiError = require('../error/api-error');
+const boom = require('@hapi/boom');
+const _ = require('lodash');
 
 function DevController({ devService }) {
 
@@ -8,21 +9,20 @@ function DevController({ devService }) {
       res.status(201).json({ message: 'Develper created Successfully' });
     } catch (err) {
       console.error(err);
-      res.status(500).json('error');
+      res.status(500).json({ message: 'Something went wrong' });
     }
   }
 
-  this.getDev = async function getDev(req, res, next) {
+  this.getDev = async function getDev(req, res) {
     try {
-      const developerId = req.params.id;
       const developer = await devService.getDev(req.params.id);
-      if (developer == null) {
-        next(ApiError.notFound(`developer with id ${developerId} not found`));
-        return;
-      }
-      res.json(developer);
+      if (_.isEmpty(developer))
+          throw boom.notFound('Developer Not Found');
+
+      res.status(201).json(developer);
     } catch (err) {
-      next(err);
+      const { payload } = err.output;
+      res.status(payload.statusCode).json(payload);
     }
   }  
 
