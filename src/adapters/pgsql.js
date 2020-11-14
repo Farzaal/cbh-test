@@ -5,7 +5,7 @@ const bluebird = require('bluebird');
 module.exports = async (config) => {
     console.info('Initializing PGSQL Adapter >');
 
-    const dbConfig = config.get('pgsql');
+    const dbConfig = config.get('database:pgsql');
 
     const initOptions = {
         promiseLib: bluebird

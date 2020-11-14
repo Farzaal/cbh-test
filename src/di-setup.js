@@ -1,5 +1,4 @@
 const awilix = require('awilix');
-const DevDao = require('./models/DevModel');
 const adapters = require('./adapters/index');
 
 const container = awilix.createContainer({
@@ -18,13 +17,18 @@ async function configureDI(config) {
   });
 
   container.loadModules(
-    ['./controllers/*.js', './services/*.js', './models/*.js'], 
+    [
+      './controllers/*.js', 
+      './services/*.js', 
+      './models/**/*.js',
+      './validators/*.js'
+    ], 
     { 
       cwd: __dirname,
       formatName: 'camelCase',
       resolverOptions: {
         lifetime: awilix.Lifetime.SINGLETON,
-        register: awilix.asClass,
+        // register: awilix.asClass,
       },
     }
   )

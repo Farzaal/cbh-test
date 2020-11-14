@@ -10,10 +10,15 @@ function validate(schema) {
           throw boom.badData(error);
 
       req.body = value;
+
       next();
     
     } catch(error) {
-      return res.status(error.output.statusCode).json(error);
+
+      const { details } = error; 
+      
+      return res.status(error.output.statusCode).json(details);
+    
     }
   };
 }
