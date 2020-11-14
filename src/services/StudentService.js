@@ -1,12 +1,8 @@
 function StudentService({ studentModel }) {
 
-    this.createStudent = async function createStudent() {
-        const stu = new studentModel({
-            name: "farzal",
-            email: "farzal@gmail.com",
-            roll_no: "1452",
-            comments: "Demo comment"
-        })
+    this.createStudent = async function createStudent({ name, email, roll_no, comments, institute }) {
+        
+        const stu = new studentModel({ name, email, roll_no, comments, institute });
 
         return await stu.save(); 
     }

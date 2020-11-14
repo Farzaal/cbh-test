@@ -1,10 +1,10 @@
-const joi = require('@hapi/joi');
+const Joi = require('joi');
 
 module.exports = () => {
-  return joi.object({
-    email: joi.string().email().required(),
-    firstName: joi.string().min(1).required(),
-    middleName: joi.string().allow(null).empty('').default(null),
-    lastName: joi.string().min(1).required(),
+  return Joi.object({
+    email: Joi.string().email().required(),
+    firstName: Joi.string().min(1).required(),
+    middleName: Joi.string().allow(null).empty('').default(null),
+    lastName: Joi.string().min(1).required(),
   })
 };

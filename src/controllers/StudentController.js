@@ -2,7 +2,10 @@ function StudentController({ studentService }) {
 
     this.createStudent = async function createStudent(req, res) {
         try {
-            const data = await studentService.createStudent();
+
+            const { name, email, roll_no, comments, institute } = req.body;
+            
+            await studentService.createStudent({ name, email, roll_no, comments, institute });
 
             return res.status(201).json({ message: 'Student Created Successfully' });
 

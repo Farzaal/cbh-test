@@ -12,7 +12,7 @@ module.exports = async (config) => {
 
         await mongoose.connect(`mongodb://${conn.user}:${conn.password}@${conn.host}:${conn.port}/${conn.database}`, options);
         mongoose.set('bufferCommands', false);
-        mongoose.set('debug', true);
+        mongoose.set('debug', false);
 
         console.info('[\u2713] Mongo [ready]');
 

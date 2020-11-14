@@ -8,6 +8,7 @@ const studentSchema = new Schema({
     email: String,
     roll_no: String,
     comments: String,
+    institute: String,
     createdAt : { type : Date, default: Date.now }
 });
 
