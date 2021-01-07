@@ -21,7 +21,7 @@ async function configureDI(config) {
       './controllers/*.js', 
       './services/*.js', 
       './models/**/*.js',
-      './validators/*.js'
+      './validators/**/*.js'
     ], 
     { 
       cwd: __dirname,

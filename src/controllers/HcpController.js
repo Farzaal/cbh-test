@@ -20,7 +20,7 @@ function HcpController({ hcpService }) {
   this.fetchSystemHcps = async function fetchSystemHcps(req, res) {
       try {
         const hcpList = await hcpService.fetchHcpByFilter() 
-        console.log("hcpList ", hcpList.length)
+
         return res.send({ success: true, data: hcpList })
 
       } catch(err) {
@@ -28,6 +28,22 @@ function HcpController({ hcpService }) {
         console.error(err);
 
         res.status(500).json({ message: 'Something went wrong. Unable to Fetch HCP List' });
+      }
+  }
+
+  this.editHcp = async function editHcp(req, res) {
+      try {
+        const updHcp = await hcpService.editHcp(req.body)
+
+        if(_.isNil(updHcp)) throw new boom.notFound('HCP Not Found')
+
+        return res.send({ success: true, message: 'Edited Successfully' })
+
+      } catch(err) {
+
+        console.log(err)
+      
+        res.status(500).json({ message: 'Something went wrong. Unable to Edit HCP' });
       }
   }
 }

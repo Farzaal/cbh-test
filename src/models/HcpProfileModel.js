@@ -11,5 +11,5 @@ const hcpProfileSchema = new Schema({
     rate: { type: String, required: true },
 }, { timestamps: true });
 
-module.exports = hcpProfile = () => db.primary.model('hcp_profile', hcpProfileSchema);
+module.exports = hcpProfileModel = () => db.primary.model('hcp_profile', hcpProfileSchema);
 

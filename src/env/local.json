@@ -7,7 +7,7 @@
             "user": "farzal",
             "password": "farzal12345",
             "port": 27017,
-            "database": "farzal-dev"
+            "database": "cbh-test"
         }
     }
 }
