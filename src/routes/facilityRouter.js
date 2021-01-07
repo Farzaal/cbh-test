@@ -8,6 +8,6 @@ const router = express.Router();
 router.post('/create', validate(hcpValidator), hcpController.createHcp);
 router.put('/edit', validate(editHcpValidator), hcpController.editHcp);
 router.get('/list', validate(viewHcpValidator), hcpController.fetchSystemHcps);
-router.delete('/delete/:hcp_id', validate(deleteHcp),hcpController.deleteHcp);
+router.delete('/delete/:facility_id', validate(deleteHcp),hcpController.deleteHcp);
 
 module.exports = router;

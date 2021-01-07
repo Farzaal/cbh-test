@@ -5,46 +5,56 @@ function HcpController({ hcpService }) {
 
   this.createHcp = async function createHcp(req, res) {
     try {
-      const newHcp = hcpService.createHcp(req.body);
+      const newHcp = hcpService.createHcp(req.data);
       
       res.status(201).json({ message: 'Hcp created Successfully' });
     
     } catch (err) {
       
       console.error(err);
-      
-      res.status(500).json({ message: 'Something went wrong. Unable to save HCP' });
+
+      next(err)
     }
   }
 
   this.fetchSystemHcps = async function fetchSystemHcps(req, res) {
       try {
-        const hcpList = await hcpService.fetchHcpByFilter() 
+        const hcpList = await hcpService.fetchHcpByFilter(req.data) 
 
         return res.send({ success: true, data: hcpList })
 
       } catch(err) {
 
-        console.error(err);
-
-        res.status(500).json({ message: 'Something went wrong. Unable to Fetch HCP List' });
+        next(err)
       }
   }
 
-  this.editHcp = async function editHcp(req, res) {
+  this.editHcp = async function editHcp(req, res, next) {
       try {
-        const updHcp = await hcpService.editHcp(req.body)
+        const updHcp = await hcpService.editHcp(req.data)
 
-        if(_.isNil(updHcp)) throw new boom.notFound('HCP Not Found')
+        if(_.isNil(updHcp)) throw boom.notFound('HCP Not Found')
 
         return res.send({ success: true, message: 'Edited Successfully' })
 
       } catch(err) {
 
-        console.log(err)
-      
-        res.status(500).json({ message: 'Something went wrong. Unable to Edit HCP' });
+        next(err)
       }
+  }
+
+  this.deleteHcp = async function(req, res, next) {
+    try {
+      const delHcp = await hcpService.editHcp({ ...req.params, active: false })
+      
+      if(_.isNil(delHcp)) throw boom.notFound('HCP Not Found')
+
+      return res.send({ success: true, message: 'Deleted Successfully' })
+
+    } catch(err) {
+
+      next(err)
+    }
   }
 }
 

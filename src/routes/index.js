@@ -1,7 +1,10 @@
 const express = require('express');
-const devRouter = require('./hcpRouter');
+const hcpRouter = require('./hcpRouter');
+const facilityRouter = require('./facilityRouter');
 
 const router = express.Router();
-router.use('/hcp', devRouter);
+router.use('/hcp', hcpRouter);
+router.use('/facility', facilityRouter);
+
 
 module.exports = router;

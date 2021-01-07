@@ -9,6 +9,7 @@ const hcpProfileSchema = new Schema({
     email: { type: String, required: true },
     qualification: { type: String, enum: ['LVN','CNA','RN'], required: true },
     rate: { type: String, required: true },
+    active: { type: Boolean, default: true }
 }, { timestamps: true });
 
 module.exports = hcpProfileModel = () => db.primary.model('hcp_profile', hcpProfileSchema);
