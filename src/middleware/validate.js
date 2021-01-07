@@ -6,8 +6,7 @@ function validate(schema) {
     
       const { error, value } = schema.validate(req.body);
       
-      if (error)
-          throw boom.badData(error);
+      if (error) throw boom.badData(error);
 
       req.body = value;
 

@@ -2,25 +2,12 @@
     "environment": "local",
     "port": 5000,
     "database": {
-        "pgsql": {
-            "host": "192.168.1.11",
-            "user": "postgres",
-            "port": 5432,
-            "password": "abc123",
-            "database": "devdb"
-        },
         "mongo": {
             "host": "localhost",
             "user": "farzal",
             "password": "farzal12345",
             "port": 27017,
             "database": "farzal-dev"
-        }
-    },
-    "queue": {
-        "rabbitmq": {
-            "host": "localhost",
-            "port": 5672
         }
     }
 }

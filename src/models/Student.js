@@ -1,7 +1,7 @@
-const { container } = require('../../di-setup');
+const { container } = require('../di-setup');
 const db = container.resolve('db');
 
-const { Schema } = db.secondary;
+const { Schema } = db.primary;
 
 const studentSchema = new Schema({
     name: String,

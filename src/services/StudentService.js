@@ -6,6 +6,11 @@ function StudentService({ studentModel }) {
 
         return await stu.save(); 
     }
+
+    this.fetchStudent = async function fetchStudent(roll_no) {
+        console.log("weerwe");
+        return await studentModel.find({ roll_no }).exec();
+    }
 }
 
 module.exports = StudentService;

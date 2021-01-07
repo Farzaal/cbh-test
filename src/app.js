@@ -10,7 +10,7 @@ module.exports.bootstrap = async (process) => {
       const env = nconf.get('ptenv');
   
       nconf.file({ file: path.join(__dirname, 'env', `${env}.json`) });
-  
+
       await Bootstrap(nconf, process);
 
     } catch (err) {
