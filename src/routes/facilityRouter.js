@@ -2,12 +2,12 @@ const express = require('express');
 const { container } = require('../di-setup');
 const validate = require('../middleware/validate');
 
-const { hcpController, hcpValidator, editHcpValidator, viewHcpValidator, deleteHcp } = container.cradle;
+const { facilityController, addFacility, editFacility, viewFacility, deleteFacility } = container.cradle;
 
 const router = express.Router();
-router.post('/create', validate(hcpValidator), hcpController.createHcp);
-router.put('/edit', validate(editHcpValidator), hcpController.editHcp);
-router.get('/list', validate(viewHcpValidator), hcpController.fetchSystemHcps);
-router.delete('/delete/:facility_id', validate(deleteHcp),hcpController.deleteHcp);
+router.post('/create', validate(addFacility), facilityController.createFacility);
+router.put('/edit', validate(editFacility), facilityController.editFacility);
+router.get('/list', validate(viewFacility), facilityController.fetchSystemFacility);
+router.delete('/delete/:facility_id', validate(deleteFacility),facilityController.deleteFacility);
 
 module.exports = router;

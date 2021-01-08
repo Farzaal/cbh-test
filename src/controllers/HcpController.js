@@ -21,7 +21,7 @@ function HcpController({ hcpService }) {
       try {
         const hcpList = await hcpService.fetchHcpByFilter(req.data) 
 
-        return res.send({ success: true, data: hcpList })
+        return res.send({ success: true, ...hcpList })
 
       } catch(err) {
 
