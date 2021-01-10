@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 function HcpController({ facilityService }) {
 
-  this.createFacility = async function createFacility(req, res) {
+  this.createFacility = async function createFacility(req, res, next) {
     try {
       const newFacility = facilityService.createFacility(req.data);
       
@@ -17,7 +17,7 @@ function HcpController({ facilityService }) {
     }
   }
 
-  this.fetchSystemFacility = async function fetchSystemFacility(req, res) {
+  this.fetchSystemFacility = async function fetchSystemFacility(req, res, next) {
       try {
         const facilityList = await facilityService.fetchFacilityByFilter(req.data) 
 

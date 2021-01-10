@@ -16,7 +16,8 @@ const facilityProfileSchema = new Schema({
     active: { type: Boolean, default: true }
 }, { timestamps: true });
 
-
+facilityProfileSchema.index({ name: 1, email: 1 })
+facilityProfileSchema.index({ email: 1}, { unique: true })
 
 module.exports = facilityProfileModel = () => db.primary.model('facility_profile', facilityProfileSchema);
 

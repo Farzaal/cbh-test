@@ -12,5 +12,8 @@ const hcpProfileSchema = new Schema({
     active: { type: Boolean, default: true }
 }, { timestamps: true });
 
+hcpProfileSchema.index({ name: 1, email: 1 })
+hcpProfileSchema.index({ email: 1 }, { unique: true })
+
 module.exports = hcpProfileModel = () => db.primary.model('hcp_profile', hcpProfileSchema);
 

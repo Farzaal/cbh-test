@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 function HcpController({ hcpService }) {
 
-  this.createHcp = async function createHcp(req, res) {
+  this.createHcp = async function createHcp(req, res, next) {
     try {
       const newHcp = hcpService.createHcp(req.data);
       
@@ -17,7 +17,7 @@ function HcpController({ hcpService }) {
     }
   }
 
-  this.fetchSystemHcps = async function fetchSystemHcps(req, res) {
+  this.fetchSystemHcps = async function fetchSystemHcps(req, res, next) {
       try {
         const hcpList = await hcpService.fetchHcpByFilter(req.data) 
 
@@ -45,7 +45,7 @@ function HcpController({ hcpService }) {
 
   this.deleteHcp = async function(req, res, next) {
     try {
-      const delHcp = await hcpService.editHcp({ ...req.params, active: false })
+      const delHcp = await hcpService.editHcp({ ...req.data, active: false })
       
       if(_.isNil(delHcp)) throw boom.notFound('HCP Not Found')
 
