@@ -9,8 +9,8 @@ module.exports = async (config) => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }
-
-        await mongoose.connect(`mongodb://${conn.user}:${conn.password}@${conn.host}:${conn.port}/${conn.database}`, options);
+        // await mongoose.connect(`mongodb://${conn.user}:${conn.password}@${conn.host}:${conn.port}/${conn.database}`, options);
+        await mongoose.connect(`mongodb://${conn.host}:${conn.port}/${conn.database}`, options);
         mongoose.set('bufferCommands', false);
         mongoose.set('debug', false);
 

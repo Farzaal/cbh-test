@@ -1,5 +1,7 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const { configureDI } = require('./di-setup');
+const cors = require('cors')
 const apiErrorHandler = require('./error/api-error-handler');
 
 async function Bootstrap(config, process) {
@@ -9,7 +11,10 @@ async function Bootstrap(config, process) {
   this.setup = async function setup() {
     await configureDI(config);
     app.use(express.json());
-    app.use('/', require('./routes'));
+    app.use(cors())
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use('/api/v1', require('./routes'));
     app.use(apiErrorHandler);
     app.listen(config.get("port"), () => {
       console.log(`server running on port ${config.get("port")}`);
